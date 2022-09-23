@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+
+<body>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+    </style>
+    <form action="" method="post">
+        <label>text</label>
+        <input type="text">
+        <label>returnSeq</label>
+        <input type="number" name="returnSeq">
+        <label>maxLen</label>
+        <input type="number" name="maxLen">
+        <label>seed</label>
+        <input type="number" name="seed">
+        <button type="submit">submit</button>
+    </form>
+    <script>
+        const form = document.forms;
+        // const promise = fetch('/textgen', {
+        //     method: 'POST',
+        //     body: form
+        // })
+        console.log(form);
+
+    </script>
+</body>
+
+</html>

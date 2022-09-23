@@ -1,21 +1,15 @@
 from enum import Enum
-from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI , Request 
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from starlette.responses import FileResponse
 
 from textCompl import TextGen
 
 app = FastAPI()
-
-
+app.mount("/template", StaticFiles(directory="template"), name="template")
 class ModelEnum(str, Enum):
-    gpt2 = "gpt2"
-    gpt2_story = "pranavpsv/gpt2-genre-story-generator"
-    gpt2Distil = "distilgpt2"
-    gpt2l = "gpt2-large"
-
-
-def Choice(model):
     gpt2 = "gpt2"
     gpt2_story = "pranavpsv/gpt2-genre-story-generator"
     gpt2Distil = "distilgpt2"
@@ -50,7 +44,7 @@ def readRoot():
 #     }
 
 
-@app.post("/textgen/")
+@app.post("/textgen")
 def readItem(userinput: UserInput, model: ModelEnum | None):
 
     generateText = TextGen(
@@ -63,6 +57,6 @@ def readItem(userinput: UserInput, model: ModelEnum | None):
     }
 
 
-# @app.put("/items/{item_id}")
-# def upgardeItems(item_id: int, item: Item):
-#     return {"item_name": item.name, "item_id": item_id}
+@app.get("/form" , response_class=HTMLResponse)
+def upgardeItems(request: Request):
+    return FileResponse('template/base.html')
